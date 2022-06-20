@@ -53,14 +53,20 @@ body{
 	padding: 40px !important;
 }
 
+.overlay{
+	background:rgba(0, 0, 0, 0.5);	
+	border-radius:10px;
+}
+
 .is-danger,
 .is-info{
 	background: #bd4130 !important;
+	color:white !important;
 }
 
 
 a {
-	color: white !important;
+	color: #bd4130 !important;
 }
 
 .media{
