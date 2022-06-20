@@ -1,0 +1,50 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Accedi | Catering')"></head>
+
+<body>
+	<header th:replace="fragments/base.html :: navbar"></header>
+	<!-- END NAV -->
+	<div class="container_body container">
+		<section class="hero is-medium is-info">
+			<div class="hero-body">
+				<p class="title">
+					Benvenuto in EasyBistro
+				</p>
+				<p class="subtitle">
+					Fai la tua prima prenotazione
+				</p>
+			</div>
+		</section>
+		<section class="section p-0">
+			<div class="box eb-box-auth ">
+				<p class="title is-4">Ciao,<br> Accedi ora </p>
+				<form th:action="@{/login}" method="post">
+					<div class="field">
+						<div class="control has-icons-left has-icons-right">
+							<input name="username" class="input" type="text" placeholder="Username">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+						</div>
+					</div>
+					<div class="field">
+						<div class="control has-icons-left has-icons-right">
+							<input name="password" class="input" type="password" placeholder="Password">
+							<span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
+						</div>
+					</div>
+					<button type="submit" class="button is-fullwidth is-info mt-5 is-rounded">Accedi</button>
+				</form>
+				<p class="title has-text-centered mt-2 is-6">Non hai già un account? <a
+						th:href="@{/register}">Registrati ora</a>
+				</p>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+
+</html>

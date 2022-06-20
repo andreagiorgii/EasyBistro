@@ -1,0 +1,74 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+
+<body>
+	<header th:replace="fragments/base.html :: navbar"></header>
+	<!-- END NAV -->
+	<div class="container_body container">
+		<section class="hero is-medium is-info">
+			<div class="hero-body">
+				<p class="title">
+					Benvenuto in EasyBistro
+				</p>
+				<p class="subtitle">
+					Fai la tua prima prenotazione
+				</p>
+			</div>
+		</section>
+		<section class="section p-0">
+			<div class="box eb-box-auth">
+				<p class="title is-4">Ciao,<br> Registrati ora </p>
+				<form th:action="@{/register}" method="post">
+					<div class="field">
+						<label class="label">Nome</label>
+						<div class="control has-icons-left has-icons-right">
+							<input th:field="${userForm.nome}" class="input" type="text" placeholder="Nome">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Cognome</label>
+						<div class="control has-icons-left has-icons-right">
+							<input th:field="${userForm.cognome}" class="input" type="text" placeholder="Cognome">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Username</label>
+						<div class="control has-icons-left has-icons-right">
+							<input th:field="${credentialsForm.username}" class="input" type="text"
+								placeholder="Username">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Password</label>
+						<div class="control has-icons-left has-icons-right">
+							<input th:field="${credentialsForm.password}" class="input" type="password"
+								placeholder="Password">
+							<span class="icon is-small is-left">
+								<i class="fas fa-lock"></i>
+							</span>
+						</div>
+					</div>
+					<button type="submit" class="button is-fullwidth is-info mt-5 is-rounded">Registrati</button>
+					<p class="title has-text-centered mt-2 is-6">Hai già un account? <a th:href="@{/login}">Accedi ora</a></p>
+
+				</form>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+
+<body>
+	<header th:replace="fragments/base.html :: navbar"></header>
+	<!-- END NAV -->
+	<div class="container_body container">
+		<section class="hero is-small is-info p-4">
+			<div class="hero-body">
+				<p class="title">
+					Ciao Andrea,
+				</p>
+				<p class="subtitle">
+					Di seguito le informazioni registrate
+				</p>
+			</div>
+		</section>
+		<section class="section p-0">
+			<div class="box">
+				<p class="title is-5">Dettagli profilo</p>
+				<p class="subtitle is-6">Gestisci il tuo profilo da qui</p>
+				<div class="media">
+					<div class="media-left">
+						<figure class="image is-96x96">
+							<img class="is-rounded"
+								src="https://img.icons8.com/color/96/undefined/circled-user-male-skin-type-7--v1.png">
+						</figure>
+					</div>
+					<div class="media-content ml-2">
+						<div class="field">
+							<p th:text="${loggedUser.nome + ' ' + loggedUser.cognome}" class="title is-5">Nome utente
+							</p>
+						</div>
+						<div class="field">
+							<p class="title is-6">Username </p>
+							<p th:text="${loggedCredentials.username}" class="subtitle is-6">username</p>
+						</div>
+						<div class="field">
+							<p class="title is-6">Ruolo </p>
+							<p th:text="${loggedCredentials.ruolo}" class="subtitle is-6">Amministratore</p>
+						</div>
+					</div>
+				</div>
+				<div class="field mt-5 has-text-right">
+					<div class="control">
+						<a th:href="@{/user/update}" class="button is-rounded is-info">Modifica profilo</a>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+
+</html>
