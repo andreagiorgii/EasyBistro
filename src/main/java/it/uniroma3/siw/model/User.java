@@ -1,12 +1,14 @@
 package it.uniroma3.siw.model;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -28,8 +30,8 @@ public class User {
 	private Ristorante ristorante;
 	
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	private Prenotazione prenotazione;
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+	private List<Prenotazione> prenotazione;
 	
 	
 	
@@ -66,14 +68,15 @@ public class User {
 		this.ristorante = ristorante;
 	}
 
-	public Prenotazione getPrenotazione() {
+	public List<Prenotazione> getPrenotazione() {
 		return prenotazione;
 	}
 
-	public void setPrenotazione(Prenotazione prenotazione) {
+	public void setPrenotazione(List<Prenotazione> prenotazione) {
 		this.prenotazione = prenotazione;
 	}
-	
+
+
 	
 	
 	

@@ -6,37 +6,40 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Prenotazione {
-	
+
 	public static final String ESTERNO_POSTO ="ESTERNO";
 	public static final String INTERNO_POSTO ="INTERNO";
-	
+
+	public static  Integer CAPIENZA_MAX_ESTERNA = 30;
+	public static  Integer CAPIENZA_MAX_INTERNA = 30;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@NotNull
 	@Min(0)
-	@Max(50)
+	@Max(30)
 	private Integer numeroPersone;
-	
+
 	@NotNull(message = "data di prenotazione richiesta")
 	private LocalDateTime dataPrenotazione;
-	
-	
-	 @OneToOne
-	 private User user;
-	
+
 	@NotBlank
 	private String luogo;
+
+	@ManyToOne
+	private User users;
+
+
 
 	public Long getId() {
 		return id;
@@ -62,12 +65,13 @@ public class Prenotazione {
 		this.dataPrenotazione = dataPrenotazione;
 	}
 
-	public User getUser() {
-		return user;
+
+	public User getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(User users) {
+		this.users = users;
 	}
 
 	public String getLuogo() {
@@ -78,6 +82,26 @@ public class Prenotazione {
 		this.luogo = luogo;
 	}
 
-	 
 
+	public boolean isPrenotabileInterno(Integer numeroPrenotati) {
+		if(CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)
+			return false;
+
+		else 
+			CAPIENZA_MAX_INTERNA = CAPIENZA_MAX_INTERNA - numeroPrenotati;
+		
+		return true;
+	}
+	
+	
+	
+	public boolean isPrenotabileEsterno(Integer numeroPrenotati) {
+		if(CAPIENZA_MAX_ESTERNA - numeroPrenotati < 0)
+			return false;
+
+		else 
+			CAPIENZA_MAX_ESTERNA = CAPIENZA_MAX_ESTERNA - numeroPrenotati;
+		
+		return true;
+	}
 }

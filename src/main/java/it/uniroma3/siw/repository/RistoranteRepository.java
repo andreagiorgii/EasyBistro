@@ -1,5 +1,9 @@
 package it.uniroma3.siw.repository;
 
-public interface RistoranteRepository {
+import org.springframework.data.repository.CrudRepository;
+
+import it.uniroma3.siw.model.Ristorante;
+
+public interface RistoranteRepository extends CrudRepository<Ristorante, Long>{
 
 }
