@@ -27,6 +27,7 @@ public class UserController {
 
 	@Autowired
 	CredentialsValidator credentialsValidator;
+	
 
 	@Autowired
 	SessionData sessionData;
