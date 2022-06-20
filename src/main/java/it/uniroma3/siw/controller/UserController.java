@@ -47,7 +47,7 @@ public class UserController {
 		if(loggedCredentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
 			return "dashboard_admin";
 		}
-		return "index";
+		return "dashboard_user";
 	}
 
 	//Vista profilo loggato admin o user

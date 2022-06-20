@@ -28,6 +28,8 @@
 								<i class="fas fa-user"></i>
 							</span>
 						</div>
+						<p class="has-text-left help" th:if="${#fields.hasErrors('userForm.nome')}"
+							th:errors="${userForm.nome}">Errore</p>
 					</div>
 
 					<div class="field">
@@ -38,6 +40,8 @@
 								<i class="fas fa-user"></i>
 							</span>
 						</div>
+						<p class="has-text-left help" th:if="${#fields.hasErrors('userForm.cognome')}"
+							th:errors="${userForm.cognome}">Errore</p>
 					</div>
 
 					<div class="field">
@@ -49,6 +53,8 @@
 								<i class="fas fa-user"></i>
 							</span>
 						</div>
+						<p class="has-text-left help" th:if="${#fields.hasErrors('credentialsForm.username')}"
+							th:errors="${credentialsForm.username}">Errore</p>
 					</div>
 
 					<div class="field">
@@ -60,9 +66,12 @@
 								<i class="fas fa-lock"></i>
 							</span>
 						</div>
+						<p class="has-text-left help" th:if="${#fields.hasErrors('credentialsForm.password')}"
+							th:errors="${credentialsForm.password}">Errore</p>
 					</div>
 					<button type="submit" class="button is-fullwidth is-info mt-5 is-rounded">Registrati</button>
-					<p class="title has-text-centered mt-2 is-6">Hai già un account? <a th:href="@{/login}">Accedi ora</a></p>
+					<p class="title has-text-centered mt-2 is-6">Hai già un account? <a th:href="@{/login}">Accedi
+							ora</a></p>
 
 				</form>
 			</div>
