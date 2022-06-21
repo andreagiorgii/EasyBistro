@@ -32,6 +32,7 @@ public class Prenotazione {
 	@Max(30)
 	private Integer numeroPersone;
 
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@NotNull(message = "data di prenotazione richiesta")
 	private LocalDateTime dataPrenotazione;
@@ -41,6 +42,11 @@ public class Prenotazione {
 
 	@ManyToOne
 	private User users;
+
+//	@NotNull
+//	@Min(0)
+//	@Max(15)
+	private Integer cellulare;
 
 	public Long getId() {
 		return id;
@@ -81,6 +87,18 @@ public class Prenotazione {
 	public void setLuogo(String luogo) {
 		this.luogo = luogo;
 	}
+
+	
+	
+
+	public Integer getCellulare() {
+		return cellulare;
+	}
+
+	public void setCellulare(Integer cellulare) {
+		this.cellulare = cellulare;
+	}
+
 
 	public boolean isPrenotabileInterno(Integer numeroPrenotati) {
 		if (CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)

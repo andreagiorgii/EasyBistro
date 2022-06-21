@@ -10,7 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import it.uniroma3.siw.controller.session.SessionData;
 import it.uniroma3.siw.controller.validator.PrenotazioneValidator;
@@ -46,15 +48,14 @@ public class PrenotazioneController {
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
 			BindingResult prenotazioneBindingResult, 
 			Model model ) {
-		
+
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
+		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 		prenotazione.setDataPrenotazione(prenotazione.getDataPrenotazione());
 	
-		System.out.println(prenotazione.getDataPrenotazione());
-		System.out.println(prenotazione.getLuogo());
-		System.out.println(prenotazione.getNumeroPersone());
-		//this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
+
+		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
 		if(!prenotazioneBindingResult.hasErrors()) {
 			if(prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
@@ -65,6 +66,22 @@ public class PrenotazioneController {
 		}
 		model.addAttribute("loggedUser", loggedUser);
 		return "prenotazione_user";
+	}
+
+
+
+	//Delete di una prenotazione da parte di un Utente
+	@PostMapping("user/{id}/delete")
+	public String deletePrenotazione(@Valid @PathVariable Long id, Model model) {
+		this.prenotazioneService.delete(id);
+		return "Ritorna alla stessa pagina";
+	}
+
+	//GET-Update di una prenotazione da parte di un Utente
+	@GetMapping("user/{id}/update")
+	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
+
+		return "updatePrenotazioneUserForm";
 	}
 
 

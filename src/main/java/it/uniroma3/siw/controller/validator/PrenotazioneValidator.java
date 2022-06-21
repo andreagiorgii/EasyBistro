@@ -35,6 +35,7 @@ public class PrenotazioneValidator implements Validator {
 		Integer numeroPersone = prenotazione.getNumeroPersone();
 		User loggedUser = sessionData.getLoggedUser();
 		
+		
 		if(prenotazione.getUsers().equals(loggedUser) && this.prenotazioneService.alreadyExists(prenotazione) != null);
 		errors.rejectValue("dataPrenotazione","prenotazione.duplicato");
 		
