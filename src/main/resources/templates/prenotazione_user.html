@@ -1,0 +1,87 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Prenota ora | Catering')"></head>
+
+<body>
+	<header th:replace="fragments/base.html :: navbar"></header>
+
+	<!-- END NAV -->
+	<div class="container_body container">
+		<section class="hero is-small is-warning p-4">
+			<div class="hero-body">
+				<p class="title">
+					Prenotazione per <span style="text-transform:capitalize;"
+						th:text="${loggedUser.nome} + ' ' + ${loggedUser.cognome}"></span>
+				</p>
+				<p class="subtitle">
+					Stai prenotando un tavolo
+				</p>
+			</div>
+		</section>
+
+		<section class="section p-0">
+			<div class="box">
+				<p class="title is-5">Dettagli prenotazione</p>
+				<p class="subtitle is-6">Compila i seguenti campi obbligatori</p>
+				<form th:action="@{/user/prenotazione}" method="post" th:object="${prenotazioneForm}">
+
+					<!--					<div class="field">-->
+					<!--						<label class="label">Cellulare</label>-->
+					<!--						<div class="control has-icons-left has-icons-right">-->
+					<!--							<input class="input" type="text" placeholder="+39 ">-->
+					<!--							<span class="icon is-small is-left">-->
+					<!--								<i class="fas fa-user"></i>-->
+					<!--							</span>-->
+					<!--						</div>-->
+					<!--					</div>-->
+
+					<div class="field">
+						<label class="label">Numero di persone</label>
+						<div class="select">
+							<select th:field="*{numeroPersone}">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Luogo</label>
+						<div class="select">
+							<select th:field="*{luogo}">
+								<option value="INTERNO">Interno</option>
+								<option value="ESTERNO">Esterno</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="field">
+						<label class="label">Data</label>
+						<p class="control is-expanded">
+							<input th:field="*{dataPrenotazione}" class="input" type="date">
+						</p>
+					</div>
+						
+
+					<div class="field mt-5 is-grouped">
+						<div class="control">
+							<button type="submit" class="button is-rounded is-success">Prenota</button>
+						</div>
+						<div class="control">
+							<a th:href="@{/home}" class="button is-rounded is-danger is-light">Annulla</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>

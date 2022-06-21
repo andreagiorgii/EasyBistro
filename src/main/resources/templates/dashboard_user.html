@@ -1,0 +1,65 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+
+<body>
+	<header th:replace="fragments/base.html :: navbar"></header>
+	<!-- END NAV -->
+	<div class="container_body container">
+		<section class="hero is-medium"
+			th:style="'background-image: url(http://www.mangiafuoco.org/wp-content/uploads/2018/04/MG_0325.jpg);background-size:cover;background-position:top;'">
+			<div class="overlay">
+				<div class="hero-body">
+
+					<p class="title has-text-white">
+						Benvenuto <span th:text="${loggedUser.nome}"></span>,
+					</p>
+					<p class="subtitle has-text-white">
+						Prenota ora il tuo tavolo
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<section class="section p-5">
+			<div class="tile is-mobile is-ancestor">
+				<div class="tile is-vertical ">
+					<a th:href="@{/user/prenotazione}" class="tile is-parent">
+						<article class="tile has-text-white is-danger is-child box">
+							<div class="level is-mobile">
+								<div class="level-left">
+									<div class="container">
+										<p class="title is-5  has-text-white">Prenota ora</p>
+										<p class="subtitle is-6  has-text-white">Vedi la lista delle prenotazioni</p>
+									</div>
+								</div>
+								<div class="level-right">
+									<i class="fa-solid fa-chevron-right"></i>
+								</div>
+							</div>
+						</article>
+					</a>
+					<a th:href="@{/user/me}" class="tile is-parent">
+						<article class="tile  has-text-white is-danger is-child box">
+							<div class="level is-mobile">
+								<div class="level-left">
+									<div class="container">
+										<p class="title is-5  has-text-white">Modifica profilo</p>
+										<p class="subtitle is-6  has-text-white">Vedi la lista delle prenotazioni</p>
+									</div>
+								</div>
+								<div class="level-right">
+									<i class="fa-solid fa-chevron-right"></i>
+								</div>
+							</div>
+						</article>
+					</a>
+				</div>
+
+			</div>
+		</section>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+<html>
+
+<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+
+<body>
+	<header th:replace="fragments/base.html :: navbar"></header>
+	<!-- END NAV -->
+	<div class="container_body container">
+		<section class="hero is-medium is-success">
+			<div class="hero-body">
+				<p class="title">
+					Profilo aggiornato!
+				</p>
+				<p class="subtitle">
+					Hai aggiornato il tuo profilo
+				</p>
+				<a class="button is-rounded is-outlined is-white" th:href="@{/home}">Vai alla dashboard</a>
+			</div>
+		</section>
+	</div>
+	<footer th:replace="fragments/base.html :: footer"></footer>
+</body>
+
+</html>
