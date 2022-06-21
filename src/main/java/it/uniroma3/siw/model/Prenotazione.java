@@ -39,7 +39,10 @@ public class Prenotazione {
 	@ManyToOne
 	private User users;
 
-
+	@NotNull
+	@Min(0)
+	@Max(15)
+	private Integer cellulare;
 
 	public Long getId() {
 		return id;
@@ -65,7 +68,7 @@ public class Prenotazione {
 		this.dataPrenotazione = dataPrenotazione;
 	}
 
-
+	
 	public User getUsers() {
 		return users;
 	}
@@ -82,6 +85,17 @@ public class Prenotazione {
 		this.luogo = luogo;
 	}
 
+	
+	
+	
+
+	public Integer getCellulare() {
+		return cellulare;
+	}
+
+	public void setCellulare(Integer cellulare) {
+		this.cellulare = cellulare;
+	}
 
 	public boolean isPrenotabileInterno(Integer numeroPrenotati) {
 		if(CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)
