@@ -1,11 +1,10 @@
 package it.uniroma3.siw.controller;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,12 +43,17 @@ public class PrenotazioneController {
 
 	//Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
-	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateAndTime,
+	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
 			BindingResult prenotazioneBindingResult, 
 			Model model ) {
 		
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
+		prenotazione.setDataPrenotazione(prenotazione.getDataPrenotazione());
+	
+		System.out.println(prenotazione.getDataPrenotazione());
+		System.out.println(prenotazione.getLuogo());
+		System.out.println(prenotazione.getNumeroPersone());
 		//this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
 		if(!prenotazioneBindingResult.hasErrors()) {
