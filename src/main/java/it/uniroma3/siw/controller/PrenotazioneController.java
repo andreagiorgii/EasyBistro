@@ -32,9 +32,7 @@ public class PrenotazioneController {
 	@Autowired
 	PrenotazioneService prenotazioneService;
 
-
-
-	//Vista Utente per la form di prenotazione 
+	// Vista Utente per la form di prenotazione
 	@GetMapping("user/prenotazione")
 	public String showFormPrenotazione(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
@@ -43,24 +41,21 @@ public class PrenotazioneController {
 		return "prenotazione_user";
 	}
 
-	//Validazione form prenotazione Utente
+	// Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
-			BindingResult prenotazioneBindingResult, 
-			Model model ) {
+			BindingResult prenotazioneBindingResult, Model model) {
 
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
-		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
-		prenotazione.setDataPrenotazione(prenotazione.getDataPrenotazione());
-	
 
-		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
+		//this.prenotazioneValidator.validate(prenotazione, prenotazioneBindingResult);
 
-		if(!prenotazioneBindingResult.hasErrors()) {
-			if(prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
+		if (!prenotazioneBindingResult.hasErrors()) {
+			if (prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				prenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
-			}else prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
+			} else
+				prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
 			prenotazioneService.save(prenotazione);
 			return "prenotazione_successful";
 		}
@@ -68,21 +63,18 @@ public class PrenotazioneController {
 		return "prenotazione_user";
 	}
 
-
-
-	//Delete di una prenotazione da parte di un Utente
+	// Delete di una prenotazione da parte di un Utente
 	@PostMapping("user/{id}/delete")
 	public String deletePrenotazione(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
 		return "Ritorna alla stessa pagina";
 	}
 
-	//GET-Update di una prenotazione da parte di un Utente
+	// GET-Update di una prenotazione da parte di un Utente
 	@GetMapping("user/{id}/update")
-	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
+	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model) {
 
 		return "updatePrenotazioneUserForm";
 	}
-
 
 }

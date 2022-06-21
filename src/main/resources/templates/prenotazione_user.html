@@ -25,15 +25,15 @@
 				<p class="subtitle is-6">Compila i seguenti campi obbligatori</p>
 				<form th:action="@{/user/prenotazione}" method="post" th:object="${prenotazioneForm}">
 
-					<!--					<div class="field">-->
-					<!--						<label class="label">Cellulare</label>-->
-					<!--						<div class="control has-icons-left has-icons-right">-->
-					<!--							<input class="input" type="text" placeholder="+39 ">-->
-					<!--							<span class="icon is-small is-left">-->
-					<!--								<i class="fas fa-user"></i>-->
-					<!--							</span>-->
-					<!--						</div>-->
-					<!--					</div>-->
+					<div class="field">
+						<label class="label">Cellulare</label>
+						<div class="control has-icons-left has-icons-right">
+							<input th:field="*{cellulare}" class="input" type="text" placeholder="+39 ">
+							<span class="icon is-small is-left">
+								<i class="fas fa-user"></i>
+							</span>
+						</div>
+					</div>
 
 					<div class="field">
 						<label class="label">Numero di persone</label>
@@ -65,11 +65,13 @@
 
 					<div class="field">
 						<label class="label">Data</label>
-						<p class="control is-expanded"> 
-							<input  th:field="*{{dataPrenotazione}}" type="datetime-local">
+						<p class="control is-expanded">
+							<input class="input" th:field="*{{dataPrenotazione}}" type="datetime-local">
 						</p>
+<!--						<p class="has-text-left help" th:if="${#fields.hasErrors('prenotazioneForm.dataPrenotazione')}"-->
+<!--							th:errors="${prenotazioneForm.dataPrenotazione}">Errore</p>-->
 					</div>
-						
+
 
 					<div class="field mt-5 is-grouped">
 						<div class="control">
