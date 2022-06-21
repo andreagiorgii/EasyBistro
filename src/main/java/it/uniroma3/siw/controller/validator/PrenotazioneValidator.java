@@ -43,7 +43,7 @@ public class PrenotazioneValidator implements Validator {
 		if(luogo.equals(Prenotazione.INTERNO_POSTO) && !prenotazione.isPrenotabileInterno(numeroPersone)) {
 		errors.rejectValue("numeroPersone","prenotazione.postiNonDisponibili");
 		}
-		
+
 		if(luogo.equals(Prenotazione.ESTERNO_POSTO) && !prenotazione.isPrenotabileEsterno(numeroPersone)) {
 		errors.rejectValue("numeroPersone","prenotazione.postiNonDisponibili");
 		}
