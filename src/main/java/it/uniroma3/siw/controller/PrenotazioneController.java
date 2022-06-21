@@ -1,8 +1,11 @@
 package it.uniroma3.siw.controller;
 
+import java.time.LocalDateTime;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,33 +39,28 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("prenotazioneForm", new Prenotazione());
-		return "";
+		return "prenotazione_user";
 	}
 
 	//Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
-	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
+	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione, @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateAndTime,
 			BindingResult prenotazioneBindingResult, 
 			Model model ) {
 		
 		User loggedUser = sessionData.getLoggedUser();
-
-		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
+		prenotazione.setUsers(loggedUser);
+		//this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
 		if(!prenotazioneBindingResult.hasErrors()) {
-			prenotazione.setUsers(loggedUser);
 			if(prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				prenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
 			}else prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
-			
 			prenotazioneService.save(prenotazione);
-			
-			model.addAttribute("loggedUser", loggedUser);
-			return "prenotazioneSuccessful";
+			return "prenotazione_successful";
 		}
-
-
-		return "La stessa vista che ritorna il metodo sopra";
+		model.addAttribute("loggedUser", loggedUser);
+		return "prenotazione_user";
 	}
 
 
