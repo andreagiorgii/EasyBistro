@@ -41,7 +41,7 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("prenotazioneForm", new Prenotazione());
-		return "";
+		return "prenotazione_user";
 	}
 
 	//Validazione form prenotazione Utente
@@ -56,20 +56,17 @@ public class PrenotazioneController {
 		prenotazione.setDataPrenotazione(dateAndTime);
 		
 		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
+		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
 		if(!prenotazioneBindingResult.hasErrors()) {
 			if(prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				prenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
 			}else prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
-			
 			prenotazioneService.save(prenotazione);
-			
-			model.addAttribute("loggedUser", loggedUser);
-			return "prenotazioneSuccessful";
+			return "prenotazione_successful";
 		}
-
-
-		return "La stessa vista che ritorna il metodo sopra";
+		model.addAttribute("loggedUser", loggedUser);
+		return "prenotazione_user";
 	}
 	
 	
