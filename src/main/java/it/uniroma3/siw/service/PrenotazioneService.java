@@ -29,6 +29,12 @@ public class PrenotazioneService {
 		prenotazioneRepository.deleteById(prenotazioneId);
 	}
 	
+	@Transactional
+	public void update(Prenotazione prenotazione, Long id) {
+		prenotazione.setId(id);
+		prenotazioneRepository.save(prenotazione);		
+	}
+	
 	public Prenotazione alreadyExists(Prenotazione prenotazione) {
 		return prenotazioneRepository.findByDataPrenotazione(prenotazione.getDataPrenotazione());
 	}
@@ -36,6 +42,7 @@ public class PrenotazioneService {
 	public Prenotazione findById(Long id) {
 		return prenotazioneRepository.findById(id).get();
 	}
+	
 	
 	
 	//restituisce tutte le prenotazioni
@@ -49,8 +56,8 @@ public class PrenotazioneService {
 	
 	
 	//restituisce tutte le prenotazioni tramite l'Id dell'Utente
-	public List<Prenotazione> getAllPrenotazioni(User loggedUser){
-		Iterable<Prenotazione> iterable = this.prenotazioneRepository.findByUsers(loggedUser);
+	public List<Prenotazione> getAllPrenotazioni(User user){
+		Iterable<Prenotazione> iterable = this.prenotazioneRepository.findByUsers(user);
 		List<Prenotazione> prenotazione = new ArrayList<>();
 		for(Prenotazione p : iterable) {
 			prenotazione.add(p);

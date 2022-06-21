@@ -43,9 +43,9 @@ public class Prenotazione {
 	@ManyToOne
 	private User users;
 
-//	@NotNull
-//	@Min(0)
-//	@Max(15)
+	@NotNull
+	@Min(0)
+	@Max(15)
 	private Integer cellulare;
 
 	public Long getId() {
@@ -88,8 +88,15 @@ public class Prenotazione {
 		this.luogo = luogo;
 	}
 
-	
-	
+		
+
+	public static Integer getCAPIENZA_MAX_ESTERNA() {
+		return CAPIENZA_MAX_ESTERNA;
+	}
+
+	public static Integer getCAPIENZA_MAX_INTERNA() {
+		return CAPIENZA_MAX_INTERNA;
+	}
 
 	public Integer getCellulare() {
 		return cellulare;
