@@ -47,15 +47,11 @@ public class PrenotazioneController {
 	//Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
-			@RequestParam("dataPrenotazione") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateAndTime,
 			BindingResult prenotazioneBindingResult, 
 			Model model ) {
-		
+
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
-		prenotazione.setDataPrenotazione(dateAndTime);
-		
-		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
 		if(!prenotazioneBindingResult.hasErrors()) {
@@ -68,20 +64,20 @@ public class PrenotazioneController {
 		model.addAttribute("loggedUser", loggedUser);
 		return "prenotazione_user";
 	}
-	
-	
-	
+
+
+
 	//Delete di una prenotazione da parte di un Utente
 	@PostMapping("user/{id}/delete")
 	public String deletePrenotazione(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
 		return "Ritorna alla stessa pagina";
 	}
-	
+
 	//GET-Update di una prenotazione da parte di un Utente
 	@GetMapping("user/{id}/update")
-		public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
-		
+	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
+
 		return "updatePrenotazioneUserForm";
 	}
 

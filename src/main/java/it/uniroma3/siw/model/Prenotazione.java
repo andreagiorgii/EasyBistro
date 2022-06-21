@@ -30,7 +30,7 @@ public class Prenotazione {
 	@Max(30)
 	private Integer numeroPersone;
 
-	@NotNull(message = "data di prenotazione richiesta")
+	@NotNull
 	private LocalDateTime dataPrenotazione;
 
 	@NotBlank
@@ -39,9 +39,9 @@ public class Prenotazione {
 	@ManyToOne
 	private User users;
 
-	@NotNull
-	@Min(0)
-	@Max(15)
+//	@NotNull
+//	@Min(0)
+//	@Max(15)
 	private Integer cellulare;
 
 	public Long getId() {

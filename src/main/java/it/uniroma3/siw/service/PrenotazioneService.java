@@ -50,7 +50,7 @@ public class PrenotazioneService {
 	
 	//restituisce tutte le prenotazioni tramite l'Id dell'Utente
 	public List<Prenotazione> getAllPrenotazioni(User loggedUser){
-		Iterable<Prenotazione> iterable = this.prenotazioneRepository.findByUser(loggedUser);
+		Iterable<Prenotazione> iterable = this.prenotazioneRepository.findByUsers(loggedUser);
 		List<Prenotazione> prenotazione = new ArrayList<>();
 		for(Prenotazione p : iterable) {
 			prenotazione.add(p);
