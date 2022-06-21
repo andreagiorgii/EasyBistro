@@ -12,14 +12,16 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Prenotazione {
 
-	public static final String ESTERNO_POSTO ="ESTERNO";
-	public static final String INTERNO_POSTO ="INTERNO";
+	public static final String ESTERNO_POSTO = "ESTERNO";
+	public static final String INTERNO_POSTO = "INTERNO";
 
-	public static  Integer CAPIENZA_MAX_ESTERNA = 30;
-	public static  Integer CAPIENZA_MAX_INTERNA = 30;
+	public static Integer CAPIENZA_MAX_ESTERNA = 30;
+	public static Integer CAPIENZA_MAX_INTERNA = 30;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,7 +32,9 @@ public class Prenotazione {
 	@Max(30)
 	private Integer numeroPersone;
 
-	@NotNull
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@NotNull(message = "data di prenotazione richiesta")
 	private LocalDateTime dataPrenotazione;
 
 	@NotBlank
@@ -68,7 +72,6 @@ public class Prenotazione {
 		this.dataPrenotazione = dataPrenotazione;
 	}
 
-	
 	public User getUsers() {
 		return users;
 	}
@@ -87,7 +90,6 @@ public class Prenotazione {
 
 	
 	
-	
 
 	public Integer getCellulare() {
 		return cellulare;
@@ -97,25 +99,24 @@ public class Prenotazione {
 		this.cellulare = cellulare;
 	}
 
+
 	public boolean isPrenotabileInterno(Integer numeroPrenotati) {
-		if(CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)
+		if (CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)
 			return false;
 
-		else 
+		else
 			CAPIENZA_MAX_INTERNA = CAPIENZA_MAX_INTERNA - numeroPrenotati;
-		
+
 		return true;
 	}
-	
-	
-	
+
 	public boolean isPrenotabileEsterno(Integer numeroPrenotati) {
-		if(CAPIENZA_MAX_ESTERNA - numeroPrenotati < 0)
+		if (CAPIENZA_MAX_ESTERNA - numeroPrenotati < 0)
 			return false;
 
-		else 
+		else
 			CAPIENZA_MAX_ESTERNA = CAPIENZA_MAX_ESTERNA - numeroPrenotati;
-		
+
 		return true;
 	}
 }

@@ -1,11 +1,10 @@
 package it.uniroma3.siw.controller;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,6 +51,10 @@ public class PrenotazioneController {
 
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
+		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
+		prenotazione.setDataPrenotazione(prenotazione.getDataPrenotazione());
+	
+
 		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
 		if(!prenotazioneBindingResult.hasErrors()) {
