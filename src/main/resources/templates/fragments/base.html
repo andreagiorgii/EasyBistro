@@ -30,8 +30,11 @@
 					<a class="navbar-item is-hidden-mobile" th:href="@{/chef}">
 						Scopri
 					</a>
-					<a class="button is-rounded is-info" th:href="@{/login}" href="https://bulma.io/">
+					<a th:if="${loggedUser == null}" class="button is-rounded is-info" th:href="@{/login}">
 						Accedi o registrati
+					</a>
+					<a th:unless="${loggedUser == null}" class="button is-rounded is-info" th:href="@{/logout}">
+						Logout
 					</a>
 				</div>
 			</div>

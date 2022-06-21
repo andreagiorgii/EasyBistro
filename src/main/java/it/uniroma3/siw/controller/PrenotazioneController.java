@@ -32,11 +32,13 @@ public class PrenotazioneController {
 	@Autowired
 	PrenotazioneService prenotazioneService;
 
+
 	@Autowired
 	UserService userService;
 
 
 	//Get-Insert Utente -> Vista Utente per la form di prenotazione 
+
 	@GetMapping("user/prenotazione")
 	public String showFormPrenotazione(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
@@ -48,18 +50,18 @@ public class PrenotazioneController {
 	//Post-Insert Utente -> Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
-			BindingResult prenotazioneBindingResult, 
-			Model model ) {
+			BindingResult prenotazioneBindingResult, Model model) {
 
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
 
-		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
+		//this.prenotazioneValidator.validate(prenotazione, prenotazioneBindingResult);
 
-		if(!prenotazioneBindingResult.hasErrors()) {
-			if(prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
+		if (!prenotazioneBindingResult.hasErrors()) {
+			if (prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				prenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
-			}else prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
+			} else
+				prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
 			prenotazioneService.save(prenotazione);
 			return "prenotazione_successful";
 		}
@@ -70,12 +72,14 @@ public class PrenotazioneController {
 
 
 	//Delete Utente -> cancellazione di una prenotazione da parte di un Utente
+
 	@PostMapping("user/{id}/delete")
 	public String deletePrenotazioneUtente(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
 		return "Ritorna alla stessa pagina";
 	}
 
+  
 	//GET-Update Utente -> aggiornamento di una prenotazione da parte di un Utente
 	@GetMapping("user/{id}/update")
 	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
@@ -146,5 +150,6 @@ public class PrenotazioneController {
 		return "Ritorna alla stessa pagina";
 	}
 	
+
 
 }
