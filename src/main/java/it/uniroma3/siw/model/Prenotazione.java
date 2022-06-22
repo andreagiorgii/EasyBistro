@@ -1,7 +1,8 @@
 package it.uniroma3.siw.model;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +21,13 @@ public class Prenotazione {
 
 	public static final String ESTERNO_POSTO = "ESTERNO";
 	public static final String INTERNO_POSTO = "INTERNO";
+	
+//	public static final String ORARIO_PRANZO = "PRANZO";
+//	public static final String ORARIO_CENA = "CENA";
+//	public static final String ORARIO_APERITIVO = "APERITIVO";
 
-	public static Integer CAPIENZA_MAX_ESTERNA = 30;
-	public static Integer CAPIENZA_MAX_INTERNA = 30;
+//	public static Integer CAPIENZA_MAX_ESTERNA = 30;
+//	public static Integer CAPIENZA_MAX_INTERNA = 30;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,9 +38,13 @@ public class Prenotazione {
 	@Max(30)
 	private Integer numeroPersone;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull
-	private LocalDateTime dataPrenotazione;
+	private LocalDate dataPrenotazione;
+	
+	@DateTimeFormat(pattern = "HH:mm")
+	@NotNull
+	private LocalTime orario;
 
 	@NotBlank
 	private String luogo;
@@ -43,11 +52,10 @@ public class Prenotazione {
 	@ManyToOne
 	private User users;
 
-
-	@NotNull
-	@Min(0)
-	@Max(30)
-	private Integer cellulare;
+	@NotBlank
+	private String cellulare;
+	
+	
 
 	public Long getId() {
 		return id;
@@ -65,11 +73,11 @@ public class Prenotazione {
 		this.numeroPersone = numeroPersone;
 	}
 
-	public LocalDateTime getDataPrenotazione() {
+	public LocalDate getDataPrenotazione() {
 		return dataPrenotazione;
 	}
 
-	public void setDataPrenotazione(LocalDateTime dataPrenotazione) {
+	public void setDataPrenotazione(LocalDate dataPrenotazione) {
 		this.dataPrenotazione = dataPrenotazione;
 	}
 
@@ -89,31 +97,41 @@ public class Prenotazione {
 		this.luogo = luogo;
 	}
 
-	public Integer getCellulare() {
+	public String getCellulare() {
 		return cellulare;
 	}
 
-	public void setCellulare(Integer cellulare) {
+	public void setCellulare(String cellulare) {
 		this.cellulare = cellulare;
 	}
 
-	public boolean isPrenotabileInterno(Integer numeroPrenotati) {
-		if (CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)
-			return false;
-
-		else
-			CAPIENZA_MAX_INTERNA = CAPIENZA_MAX_INTERNA - numeroPrenotati;
-
-		return true;
+	public LocalTime getOrario() {
+		return orario;
 	}
 
-	public boolean isPrenotabileEsterno(Integer numeroPrenotati) {
-		if (CAPIENZA_MAX_ESTERNA - numeroPrenotati < 0)
-			return false;
-
-		else
-			CAPIENZA_MAX_ESTERNA = CAPIENZA_MAX_ESTERNA - numeroPrenotati;
-
-		return true;
+	public void setOrario(LocalTime orario) {
+		this.orario = orario;
 	}
+
+	
+	
+//	public boolean isPrenotabileInterno(Integer numeroPrenotati) {
+//		if (CAPIENZA_MAX_INTERNA - numeroPrenotati < 0)
+//			return false;
+//
+//		else
+//			CAPIENZA_MAX_INTERNA = CAPIENZA_MAX_INTERNA - numeroPrenotati;
+//
+//		return true;
+//	}
+//
+//	public boolean isPrenotabileEsterno(Integer numeroPrenotati) {
+//		if (CAPIENZA_MAX_ESTERNA - numeroPrenotati < 0)
+//			return false;
+//
+//		else
+//			CAPIENZA_MAX_ESTERNA = CAPIENZA_MAX_ESTERNA - numeroPrenotati;
+//
+//		return true;
+//	}
 }
