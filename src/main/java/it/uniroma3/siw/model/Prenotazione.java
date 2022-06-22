@@ -1,5 +1,6 @@
 package it.uniroma3.siw.model;
 
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -41,6 +42,7 @@ public class Prenotazione {
 
 	@ManyToOne
 	private User users;
+
 
 	//@NotNull
 	//@Min(0)

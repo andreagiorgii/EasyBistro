@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller.validator;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -33,6 +35,7 @@ public class PrenotazioneValidator implements Validator {
 		Prenotazione prenotazione = (Prenotazione) target;
 		String luogo = prenotazione.getLuogo();
 		Integer numeroPersone = prenotazione.getNumeroPersone();
+		LocalDateTime dataPrenotazione = prenotazione.getDataPrenotazione();
 		User loggedUser = sessionData.getLoggedUser();
 		
 		

@@ -46,15 +46,16 @@ public class PrenotazioneController {
 		return "prenotazione_user";
 	}
 
-	//Post-Insert Utente -> Validazione form prenotazione Utente
+	//Post-Insert -> Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
 			BindingResult prenotazioneBindingResult, Model model) {
 
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
+		
+		//this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
-		//this.prenotazioneValidator.validate(prenotazione, prenotazioneBindingResult);
 
 		if (!prenotazioneBindingResult.hasErrors()) {
 			if (prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
@@ -142,7 +143,7 @@ public class PrenotazioneController {
 	}
 	
 	
-	//Delete Admin -> cancellazione di una prenotazione di un Utente da parte dell'Admin  OK
+	//Delete Admin -> cancellazione di una prenotazione di un Utente da parte dell'Admin
 	@PostMapping("admin/{id}/delete")
 	public String deletePrenotazioneUtenteFromAdmin(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
