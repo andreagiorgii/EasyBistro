@@ -90,7 +90,7 @@ public class UserController {
 			model.addAttribute("user", loggedUser);
 			return "user_update_successful";
 		}		
-		return "updateForm";
+		return "redirect:/user/update";
 	}
 
 	
