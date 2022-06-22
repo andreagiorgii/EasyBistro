@@ -33,6 +33,8 @@
 								<i class="fas fa-user"></i>
 							</span>
 						</div>
+						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('cellulare')}"
+							th:errors="*{cellulare}">Errore</p>
 					</div>
 
 					<div class="field">
@@ -68,8 +70,8 @@
 						<p class="control is-expanded">
 							<input class="input" th:field="*{{dataPrenotazione}}" type="datetime-local">
 						</p>
-<!--						<p class="has-text-left help" th:if="${#fields.hasErrors('prenotazioneForm.dataPrenotazione')}"-->
-<!--							th:errors="${prenotazioneForm.dataPrenotazione}">Errore</p>-->
+						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('dataPrenotazione')}"
+							th:errors="*{dataPrenotazione}">Errore</p>
 					</div>
 
 
