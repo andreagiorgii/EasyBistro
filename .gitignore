@@ -14,7 +14,7 @@ target/
 .sts4-cache
 
 ### Temps ####
-.DS_Store
+**/.DS_Store
 
 ### IntelliJ IDEA ###
 .idea
