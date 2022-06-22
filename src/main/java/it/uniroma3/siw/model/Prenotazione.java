@@ -42,9 +42,9 @@ public class Prenotazione {
 	@ManyToOne
 	private User users;
 
-	@NotNull
-	@Min(0)
-	@Max(15)
+	//@NotNull
+	//@Min(0)
+	//@Max(15)
 	private Integer cellulare;
 
 	public Long getId() {
