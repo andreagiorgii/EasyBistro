@@ -22,7 +22,7 @@
 				<p class="subtitle is-6">Gestisci il tuo profilo da qui</p>
 				<div class="media">
 					<div class="media-left">
-						<figure class="image is-96x96">
+						<figure class="image is-128x128">
 							<img class="is-rounded"
 								src="https://img.icons8.com/color/96/undefined/circled-user-male-skin-type-7--v1.png">
 						</figure>
@@ -41,9 +41,7 @@
 							<p th:text="${loggedCredentials.ruolo}" class="subtitle is-6">Amministratore</p>
 						</div>
 					</div>
-				</div>
-				<div class="field mt-5 has-text-right">
-					<div class="control">
+					<div class="media-right">
 						<a th:href="@{/user/update}" class="button is-rounded is-danger">Modifica profilo</a>
 					</div>
 				</div>

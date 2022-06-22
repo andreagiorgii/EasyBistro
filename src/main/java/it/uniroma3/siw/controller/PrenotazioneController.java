@@ -32,6 +32,7 @@ public class PrenotazioneController {
 	@Autowired
 	PrenotazioneService prenotazioneService;
 
+
 	@Autowired
 	UserService userService;
 
@@ -48,18 +49,19 @@ public class PrenotazioneController {
 	//Post-Insert -> Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
-			BindingResult prenotazioneBindingResult, 
-			Model model ) {
+			BindingResult prenotazioneBindingResult, Model model) {
 
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
 		
 		//this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
 
-		if(!prenotazioneBindingResult.hasErrors()) {
-			if(prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
+
+		if (!prenotazioneBindingResult.hasErrors()) {
+			if (prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				prenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
-			}else prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
+			} else
+				prenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
 			prenotazioneService.save(prenotazione);
 			return "prenotazione_successful";
 		}
@@ -70,12 +72,14 @@ public class PrenotazioneController {
 
 
 	//Delete Utente -> cancellazione di una prenotazione da parte di un Utente
+
 	@PostMapping("user/{id}/delete")
 	public String deletePrenotazioneUtente(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
-		return "Ritorna alla stessa pagina";
+		return "redirect:/user/allPrenotazioni";
 	}
 
+  
 	//GET-Update Utente -> aggiornamento di una prenotazione da parte di un Utente
 	@GetMapping("user/{id}/update")
 	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
@@ -85,7 +89,7 @@ public class PrenotazioneController {
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("loggedPrenotazione", prenotazione);
 		model.addAttribute("newPrenotazione", new Prenotazione());
-		return "updatePrenotazioneUserForm";
+		return "prenotazione_user_update";
 	}
 
 	
@@ -98,7 +102,7 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		newPrenotazione.setUsers(loggedUser);
 
-		this.prenotazioneValidator.validate(newPrenotazione,prenotazioneBindingResult);
+		//this.prenotazioneValidator.validate(newPrenotazione,prenotazioneBindingResult);
 		
 		if(!prenotazioneBindingResult.hasErrors()) {
 			if(newPrenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
@@ -112,30 +116,30 @@ public class PrenotazioneController {
 	}
 	
 	
-	//Get-Vista Utente -> lista di tutte le prenotazioni di un Utente 
+	//Get-Vista Utente -> lista di tutte le prenotazioni di un Utente  OK
 	@GetMapping("/user/allPrenotazioni")
 	public String showListAllPrenotazioniUser(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(loggedUser);
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "listAllPrenotazioniUser";	
+		return "lista_prenotazioni_user";	
 	}
 	
-	//Get-Vista Admin -> lista di tutte le prenotazioni di un Utente selezionato
+	//Get-Vista Admin -> lista di tutte le prenotazioni di un Utente selezionato  OK
 	@GetMapping("/admin/{id}/allPrenotazioni")
 	public String showListAdminAllPrenotazioniUser(@Valid @PathVariable Long id,Model model) {
 		User user = userService.getUser(id);
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(user);
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "listAdminAllPrenotazioniUser";	
+		return "lista_prenotazioni_admin";	
 	}
 	
-	//Get-Vista Admin -> lista di tutte le prenotazioni effettuate
+	//Get-Vista Admin -> lista di tutte le prenotazioni effettuate OK
 	@GetMapping("/admin/allPrenotazioni")
 	public String showListAllPrenotazioni(@Valid Model model) {
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni();
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "allPrenotazioniAdmin";
+		return "lista_prenotazioni_admin";
 	}
 	
 	
@@ -143,8 +147,9 @@ public class PrenotazioneController {
 	@PostMapping("admin/{id}/delete")
 	public String deletePrenotazioneUtenteFromAdmin(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
-		return "Ritorna alla stessa pagina";
+		return "redirect:/admin/allPrenotazioni";
 	}
 	
+
 
 }

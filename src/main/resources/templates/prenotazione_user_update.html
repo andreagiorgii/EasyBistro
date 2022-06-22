@@ -23,8 +23,7 @@
 			<div class="box">
 				<p class="title is-5">Dettagli prenotazione</p>
 				<p class="subtitle is-6">Compila i seguenti campi obbligatori</p>
-				<form th:action="@{/user/prenotazione}" method="post" th:object="${prenotazioneForm}">
-
+				<form th:action="@{'/user/' + ${loggedPrenotazione.id} + '/update'}" method="post" th:object="${loggedPrenotazione}">
 					<div class="field">
 						<label class="label">Cellulare</label>
 						<div class="control has-icons-left has-icons-right">

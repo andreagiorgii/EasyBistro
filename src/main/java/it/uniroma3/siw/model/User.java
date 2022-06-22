@@ -25,16 +25,12 @@ public class User {
 
 	@NotBlank
 	private String cognome;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Ristorante ristorante;
-	
-	
+
 	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
 	private List<Prenotazione> prenotazione;
-	
-	
-	
 
 	public Long getId() {
 		return id;
@@ -76,8 +72,4 @@ public class User {
 		this.prenotazione = prenotazione;
 	}
 
-
-	
-	
-	
 }

@@ -9,28 +9,27 @@
 		<section class="hero is-small is-info p-4">
 			<div class="hero-body">
 				<p class="title">
-					Lista prenotazioni
+					Utenti registrati
 				</p>
 				<p class="subtitle">
-					Tutti i prenotati del ristorante
+					Tutti gli utenti registrati
 				</p>
 			</div>
 		</section>
 
 		<section class="section p-0">
 			<div class="box prenotazioni-box">
-				<a  th:if="${!prenotazioneList.empty}" th:each="prenotazione : ${prenotazioneList}" class="box prenotazioni-item-box">
+				<a th:href="@{'/admin/' + ${credential.user.id} + '/allPrenotazioni'}" th:each="credential : ${credentialsList}" class="box user-item-box">
 					<div class="media">
 						<div class="media-left">
 							<div class="container">
-								<p class="title is-5" th:text="${prenotazione.users.nome + ' ' + prenotazione.users.cognome}">Andrea Giorgi</p>
-								<p class="subtitle is-6 mb-0" th:text="${{ 'Recapito ' + prenotazione.cellulare}}">Alle ore 21:00</p>
-								<p class="subtitle is-6" th:text="${{ 'Il ' + prenotazione.dataPrenotazione}}">Alle ore 21:00</p>
+								<p class="title is-5"
+									th:text="${credential.user.nome + ' ' + credential.user.cognome }">Username</p>
+								<p class="subtitle is-6" th:text="${credential.username}">Alle ore 21:00</p>
 							</div>
 						</div>
 						<div class="media-content has-text-right">
-							<p class="title is-5 mb-1" th:text="${prenotazione.numeroPersone + ' persone'}">4 persone</p>
-							<form class="mt-0" method="post" th:action="@{'/admin/'+ ${prenotazione.id} + '/delete'}">
+							<form class="mt-3" method="post" th:action="@{'/admin/allUsers/'+ ${credential.username} + '/delete'}">
 								<button type="submit" class="button is-rounded is-small is-danger">Cancella</button>
 							</form>
 						</div>
@@ -39,7 +38,6 @@
 						</div>
 					</div>
 				</a>
-				<div class="notification is-warning" th:unless="${!prenotazioneList.empty}">Non ci sono prenotazioni effettuate</div>
 			</div>
 		</section>
 	</div>
