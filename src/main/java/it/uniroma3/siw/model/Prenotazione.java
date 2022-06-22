@@ -44,7 +44,7 @@ public class Prenotazione {
 	private User users;
 
 
-	//@NotNull
+	@NotBlank
 	//@Min(0)
 	//@Max(15)
 	private Integer cellulare;
