@@ -65,6 +65,9 @@ public class PrenotazioneController {
 			prenotazioneService.save(prenotazione);
 			return "prenotazione_successful";
 		}
+
+
+
 		model.addAttribute("loggedUser", loggedUser);
 		return "prenotazione_user";
 	}
