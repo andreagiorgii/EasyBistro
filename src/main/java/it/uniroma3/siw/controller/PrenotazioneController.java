@@ -38,7 +38,6 @@ public class PrenotazioneController {
 
 
 	//Get-Insert Utente -> Vista Utente per la form di prenotazione 
-
 	@GetMapping("user/prenotazione")
 	public String showFormPrenotazione(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
@@ -76,7 +75,7 @@ public class PrenotazioneController {
 	@PostMapping("user/{id}/delete")
 	public String deletePrenotazioneUtente(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
-		return "Ritorna alla stessa pagina";
+		return "redirect:/user/allPrenotazioni";
 	}
 
   
@@ -89,7 +88,7 @@ public class PrenotazioneController {
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("loggedPrenotazione", prenotazione);
 		model.addAttribute("newPrenotazione", new Prenotazione());
-		return "updatePrenotazioneUserForm";
+		return "prenotazione_user_update";
 	}
 
 	
@@ -102,7 +101,7 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		newPrenotazione.setUsers(loggedUser);
 
-		this.prenotazioneValidator.validate(newPrenotazione,prenotazioneBindingResult);
+		//this.prenotazioneValidator.validate(newPrenotazione,prenotazioneBindingResult);
 		
 		if(!prenotazioneBindingResult.hasErrors()) {
 			if(newPrenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
@@ -116,38 +115,38 @@ public class PrenotazioneController {
 	}
 	
 	
-	//Get-Vista Utente -> lista di tutte le prenotazioni di un Utente 
+	//Get-Vista Utente -> lista di tutte le prenotazioni di un Utente  OK
 	@GetMapping("/user/allPrenotazioni")
 	public String showListAllPrenotazioniUser(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(loggedUser);
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "listAllPrenotazioniUser";	
+		return "lista_prenotazioni_user";	
 	}
 	
-	//Get-Vista Admin -> lista di tutte le prenotazioni di un Utente selezionato
+	//Get-Vista Admin -> lista di tutte le prenotazioni di un Utente selezionato  OK
 	@GetMapping("/admin/{id}/allPrenotazioni")
 	public String showListAdminAllPrenotazioniUser(@Valid @PathVariable Long id,Model model) {
 		User user = userService.getUser(id);
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(user);
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "listAdminAllPrenotazioniUser";	
+		return "lista_prenotazioni_admin";	
 	}
 	
-	//Get-Vista Admin -> lista di tutte le prenotazioni effettuate
+	//Get-Vista Admin -> lista di tutte le prenotazioni effettuate OK
 	@GetMapping("/admin/allPrenotazioni")
 	public String showListAllPrenotazioni(@Valid Model model) {
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni();
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "allPrenotazioniAdmin";
+		return "lista_prenotazioni_admin";
 	}
 	
 	
-	//Delete Admin -> cancellazione di una prenotazione di un Utente da parte dell'Admin
-	@PostMapping("user/{id}/delete")
+	//Delete Admin -> cancellazione di una prenotazione di un Utente da parte dell'Admin  OK
+	@PostMapping("admin/{id}/delete")
 	public String deletePrenotazioneUtenteFromAdmin(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
-		return "Ritorna alla stessa pagina";
+		return "redirect:/admin/allPrenotazioni";
 	}
 	
 

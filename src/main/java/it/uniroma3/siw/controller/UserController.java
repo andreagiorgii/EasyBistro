@@ -105,7 +105,7 @@ public class UserController {
 		List<Credentials> allCredentials = this.credentialsService.getAllCredentials();
 		model.addAttribute("loggedUser", loggedUser);
 		model.addAttribute("credentialsList", allCredentials);
-		return "allUsers";
+		return "lista_utenti_admin";
 	}
 	
 	
