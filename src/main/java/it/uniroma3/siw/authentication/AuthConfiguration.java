@@ -61,7 +61,7 @@ public class AuthConfiguration extends WebSecurityConfigurerAdapter {
 		//Il logout è ativato con una richiesta GET a "/logout"
 		.logoutUrl("/logout")
 		//In caso di successo, si vine reindirizzati alla /index page
-		.logoutSuccessUrl("/index")
+		.logoutSuccessUrl("/login")
 		.invalidateHttpSession(true)
 		.deleteCookies("JSESSIONID")
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))

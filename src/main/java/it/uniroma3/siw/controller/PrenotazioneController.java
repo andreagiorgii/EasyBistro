@@ -1,5 +1,6 @@
 package it.uniroma3.siw.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -32,12 +33,10 @@ public class PrenotazioneController {
 	@Autowired
 	PrenotazioneService prenotazioneService;
 
-
 	@Autowired
 	UserService userService;
 
-
-	//Get-Insert Utente -> Vista Utente per la form di prenotazione 
+	// Get-Insert Utente -> Vista Utente per la form di prenotazione
 	@GetMapping("user/prenotazione")
 	public String showFormPrenotazione(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
@@ -46,7 +45,7 @@ public class PrenotazioneController {
 		return "prenotazione_user";
 	}
 
-	//Post-Insert -> Validazione form prenotazione Utente
+	// Post-Insert -> Validazione form prenotazione Utente
 	@PostMapping("user/prenotazione")
 	public String prenotazioneUser(@Valid @ModelAttribute("prenotazioneForm") Prenotazione prenotazione,
 			BindingResult prenotazioneBindingResult, Model model) {
@@ -54,8 +53,7 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		prenotazione.setUsers(loggedUser);
 
-		this.prenotazioneValidator.validate(prenotazione,prenotazioneBindingResult);
-
+		this.prenotazioneValidator.validate(prenotazione, prenotazioneBindingResult);
 
 		if (!prenotazioneBindingResult.hasErrors()) {
 			if (prenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
@@ -68,15 +66,11 @@ public class PrenotazioneController {
 			return "prenotazione_successful";
 		}
 
-
-
 		model.addAttribute("loggedUser", loggedUser);
 		return "prenotazione_user";
 	}
 
-
-
-	//Delete Utente -> cancellazione di una prenotazione da parte di un Utente
+	// Delete Utente -> cancellazione di una prenotazione da parte di un Utente
 
 	@PostMapping("user/{id}/delete")
 	public String deletePrenotazioneUtente(@Valid @PathVariable Long id, Model model) {
@@ -84,10 +78,9 @@ public class PrenotazioneController {
 		return "redirect:/user/allPrenotazioni";
 	}
 
-
-	//GET-Update Utente -> aggiornamento di una prenotazione da parte di un Utente
+	// GET-Update Utente -> aggiornamento di una prenotazione da parte di un Utente
 	@GetMapping("user/{id}/update")
-	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model){
+	public String updatePrenotazioneUserForm(@Valid @PathVariable Long id, Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		Prenotazione prenotazione = this.prenotazioneService.findById(id);
 		model.addAttribute("loggedUser", loggedUser);
@@ -95,22 +88,20 @@ public class PrenotazioneController {
 		return "prenotazione_user_update";
 	}
 
-
-	//Post-Update Utente -> aggiornamento di una prenotazione da parte di un Utente
+	// Post-Update Utente -> aggiornamento di una prenotazione da parte di un Utente
 	@PostMapping("user/{id}/update")
-	public String updatePrenotazione(@Valid @ModelAttribute("loggedPrenotazione") Prenotazione updatePrenotazione,@PathVariable Long id,
-			BindingResult prenotazioneBindingResult, 
-			Model model ) {
+	public String updatePrenotazione(@Valid @ModelAttribute("loggedPrenotazione") Prenotazione updatePrenotazione,
+			@PathVariable Long id, BindingResult prenotazioneBindingResult, Model model) {
 
 		User loggedUser = sessionData.getLoggedUser();
 		updatePrenotazione.setUsers(loggedUser);
 
-		this.prenotazioneValidator.validate(updatePrenotazione,prenotazioneBindingResult);
+		this.prenotazioneValidator.validate(updatePrenotazione, prenotazioneBindingResult);
 
-		if(!prenotazioneBindingResult.hasErrors()) {
-			if(updatePrenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
+		if (!prenotazioneBindingResult.hasErrors()) {
+			if (updatePrenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				updatePrenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
-			}else {
+			} else {
 				updatePrenotazione.setLuogo(Prenotazione.ESTERNO_POSTO);
 			}
 			prenotazioneService.update(updatePrenotazione, id);
@@ -120,41 +111,41 @@ public class PrenotazioneController {
 		return "redirect:/user/{id}/update";
 	}
 
-
-	//Get-Vista Utente -> lista di tutte le prenotazioni di un Utente  OK
+	// Get-Vista Utente -> lista di tutte le prenotazioni di un Utente OK
 	@GetMapping("/user/allPrenotazioni")
 	public String showListAllPrenotazioniUser(@Valid Model model) {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(loggedUser);
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "lista_prenotazioni_user";	
+		model.addAttribute("loggedUser",loggedUser);
+		return "lista_prenotazioni_user";
 	}
 
-	//Get-Vista Admin -> lista di tutte le prenotazioni di un Utente selezionato  OK
+	// Get-Vista Admin -> lista di tutte le prenotazioni di un Utente selezionato OK
 	@GetMapping("/admin/{id}/allPrenotazioni")
-	public String showListAdminAllPrenotazioniUser(@Valid @PathVariable Long id,Model model) {
+	public String showListAdminAllPrenotazioniUser(@Valid @PathVariable Long id, Model model) {
 		User user = userService.getUser(id);
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(user);
-		model.addAttribute("prenotazioneList", allPrenotazioni);
-		return "lista_prenotazioni_admin";	
-	}
-
-	//Get-Vista Admin -> lista di tutte le prenotazioni effettuate OK
-	@GetMapping("/admin/allPrenotazioni")
-	public String showListAllPrenotazioni(@Valid Model model) {
-		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni();
 		model.addAttribute("prenotazioneList", allPrenotazioni);
 		return "lista_prenotazioni_admin";
 	}
 
+	// Get-Vista Admin -> lista di tutte le prenotazioni effettuate OK
+	@GetMapping("/admin/allPrenotazioni")
+	public String showListAllPrenotazioni(@Valid Model model) {
+		User loggedUser = sessionData.getLoggedUser();
+		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni();
+		model.addAttribute("prenotazioneList", allPrenotazioni);
+		model.addAttribute("loggedUser",loggedUser);
+		return "lista_prenotazioni_admin";
+	}
 
-	//Delete Admin -> cancellazione di una prenotazione di un Utente da parte dell'Admin
+	// Delete Admin -> cancellazione di una prenotazione di un Utente da parte
+	// dell'Admin
 	@PostMapping("admin/{id}/delete")
 	public String deletePrenotazioneUtenteFromAdmin(@Valid @PathVariable Long id, Model model) {
 		this.prenotazioneService.delete(id);
 		return "redirect:/admin/allPrenotazioni";
 	}
-
-
 
 }
