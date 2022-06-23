@@ -14,11 +14,11 @@ import it.uniroma3.siw.repository.PrenotazioneRepository;
 
 @Service
 public class PrenotazioneService {
-	
+
 	@Autowired
 	PrenotazioneRepository prenotazioneRepository;
 
-	
+
 	@Transactional
 	public void save(Prenotazione prenotazione) {
 		prenotazioneRepository.save(prenotazione);		
@@ -28,23 +28,34 @@ public class PrenotazioneService {
 	public void delete(Long prenotazioneId) {
 		prenotazioneRepository.deleteById(prenotazioneId);
 	}
-	
+
 	@Transactional
 	public void update(Prenotazione prenotazione, Long id) {
 		prenotazione.setId(id);
 		prenotazioneRepository.save(prenotazione);		
 	}
+
 	
-	public Prenotazione alreadyExists(Prenotazione prenotazione) {
-		return prenotazioneRepository.findByDataPrenotazione(prenotazione.getDataPrenotazione());
+	
+	public boolean alreadyExists(Prenotazione prenotazione, User loggedUser) {
+
+		List<Prenotazione> lista = this.prenotazioneRepository.findByDataPrenotazione(prenotazione.getDataPrenotazione());
+		if(lista != null) {
+			for(Prenotazione p : lista) {
+				if(p.getUsers().getId()== loggedUser.getId()) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
-	
+
 	public Prenotazione findById(Long id) {
 		return prenotazioneRepository.findById(id).get();
 	}
-	
-	
-	
+
+
+
 	//restituisce tutte le prenotazioni
 	public List<Prenotazione> getAllPrenotazioni(){
 		List<Prenotazione> prenotazione = new ArrayList<>();
@@ -53,8 +64,8 @@ public class PrenotazioneService {
 		}
 		return prenotazione;
 	}
-	
-	
+
+
 	//restituisce tutte le prenotazioni tramite l'Id dell'Utente
 	public List<Prenotazione> getAllPrenotazioni(User user){
 		Iterable<Prenotazione> iterable = this.prenotazioneRepository.findByUsers(user);

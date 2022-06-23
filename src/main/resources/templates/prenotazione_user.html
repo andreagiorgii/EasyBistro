@@ -68,10 +68,18 @@
 					<div class="field">
 						<label class="label">Data</label>
 						<p class="control is-expanded">
-							<input class="input" th:field="*{{dataPrenotazione}}" type="datetime-local">
+							<input class="input" th:field="*{{dataPrenotazione}}" type="date">
 						</p>
 						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('dataPrenotazione')}"
 							th:errors="*{dataPrenotazione}">Errore</p>
+					</div>
+					<div class="field">
+						<label class="label">Orario</label>
+						<p class="control is-expanded">
+							<input class="input" th:field="*{{orario}}" type="time">
+						</p>
+						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('orario')}"
+							th:errors="*{orario}">Errore</p>
 					</div>
 
 
