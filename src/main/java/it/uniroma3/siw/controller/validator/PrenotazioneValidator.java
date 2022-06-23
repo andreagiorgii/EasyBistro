@@ -41,14 +41,16 @@ public class PrenotazioneValidator implements Validator {
 
 		
 
-		
-		if(!((prenotazione.getOrario().getHour() <= MAX_ORARIO_PRANZO && prenotazione.getOrario().getHour() >= MIN_ORARIO_PRANZO) 
-				|| (prenotazione.getOrario().getHour() <= MAX_ORARIO_CENA && prenotazione.getOrario().getHour() >= MIN_ORARIO_CENA))) {
+		if(prenotazione.getOrario() != null) {
+			if(!((prenotazione.getOrario().getHour() <= MAX_ORARIO_PRANZO && prenotazione.getOrario().getHour() >= MIN_ORARIO_PRANZO) 
+					|| (prenotazione.getOrario().getHour() <= MAX_ORARIO_CENA && prenotazione.getOrario().getHour() >= MIN_ORARIO_CENA))) {
 
-			errors.rejectValue("orario", "prenotazione.orario");
-			System.out.println(prenotazione.getOrario().getHour());
-		
+				errors.rejectValue("orario", "prenotazione.orario");
+				System.out.println(prenotazione.getOrario().getHour());
+			
+			}
 		}
+		
 		
 		if(this.prenotazioneService.alreadyExists(prenotazione, loggedUser))
 			errors.rejectValue("dataPrenotazione","prenotazione.duplicato");
