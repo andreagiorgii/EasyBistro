@@ -28,7 +28,7 @@
 					<div class="field">
 						<label class="label">Cellulare</label>
 						<div class="control has-icons-left has-icons-right">
-							<input th:field="*{cellulare}" class="input" type="text" placeholder="+39 ">
+							<input th:field="*{cellulare}" class="input" type="number" placeholder="+39 ">
 							<span class="icon is-small is-left">
 								<i class="fas fa-user"></i>
 							</span>
@@ -65,22 +65,29 @@
 						</div>
 					</div>
 
-					<div class="field">
-						<label class="label">Data</label>
-						<p class="control is-expanded">
-							<input class="input" th:field="*{{dataPrenotazione}}" type="date">
-						</p>
-						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('dataPrenotazione')}"
-							th:errors="*{dataPrenotazione}">Errore</p>
+					<div class="field ">
+						<div class="field-body">
+							<div class="field">
+								<label class="label">Data</label>
+								<p class="control is-expanded">
+									<input class="input" th:field="*{dataPrenotazione}" type="date">
+								</p>
+								<p class="has-text-left has-text-danger help"
+									th:if="${#fields.hasErrors('dataPrenotazione')}" th:errors="*{dataPrenotazione}" required>
+									Errore
+								</p>
+							</div>
+							<div class="field">
+								<label class="label">Orario</label>
+								<p class="control is-expanded">
+									<input class="input" th:field="*{orario}" type="time" required>
+								</p>
+								<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('orario')}"
+									th:errors="*{orario}">Errore</p>
+							</div>
+						</div>
 					</div>
-					<div class="field">
-						<label class="label">Orario</label>
-						<p class="control is-expanded">
-							<input class="input" th:field="*{{orario}}" type="time">
-						</p>
-						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('orario')}"
-							th:errors="*{orario}">Errore</p>
-					</div>
+
 
 
 					<div class="field mt-5 is-grouped">
