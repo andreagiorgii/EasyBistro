@@ -1,47 +1,56 @@
 <html>
 
-<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+<head th:replace="fragments/base.html :: headerfiles(title='Home | EasyBistro')"></head>
 
 <body>
 	<header th:replace="fragments/base.html :: navbar"></header>
 	<!-- END NAV -->
 	<div class="container_body container">
-		<section class="hero is-medium is-info">
-			<div class="hero-body">
-				<p class="title">
-					Benvenuto in EasyBistro
-				</p>
-				<p class="subtitle">
-					Fai la tua prima prenotazione
-				</p>
+		<section class="hero is-medium"
+			th:style="'background-image: url(http://www.mangiafuoco.org/wp-content/uploads/2018/04/MG_0325.jpg);background-size:cover;background-position:center;'">
+			<div class="overlay">
+				<div class="hero-body">
+
+					<p class="title has-text-white">
+						Benvenuto,
+					</p>
+					<p class="subtitle has-text-white">
+						Prenota ora il tuo tavolo
+					</p>
+				</div>
 			</div>
 		</section>
-		<section class="section p-0">
-			<div class="box eb-box-auth ">
-				<p class="title is-4">Ciao,<br> Accedi ora </p>
-				<form method="post">
-					<div class="field">
-						<div class="control has-icons-left has-icons-right">
-							<input class="input" type="text" placeholder="Username">
-							<span class="icon is-small is-left">
-								<i class="fas fa-user"></i>
-							</span>
-						</div>
-					</div>
-					<div class="field">
-
-						<div class="control has-icons-left has-icons-right">
-							<input class="input" type="password" placeholder="Password">
-							<span class="icon is-small is-left">
-								<i class="fas fa-lock"></i>
-							</span>
-						</div>
-					</div>
-					<button type="submit" class="button is-fullwidth is-info mt-5 is-rounded">Accedi</button>
-				</form>
-				<p class="title has-text-centered mt-2 is-6">Non hai già un account? <a
-						th:href="@{/register}">Registrati ora</a></p>
+		<section class="section p-4">
+			<div class="box is-danger">
+				<p class="title is-5 has-text-white">Le nostre offerte</p>
+				<p class="subtitle is-6 has-text-white">Prenota subito il tuo tavolo e vieni a trovarci</p>
 			</div>
+			<section class="section notification p-4">
+				<div class="media is-mobile box">
+					<div class="media-left">
+						<p class="title is-5">Aperitivo</p>
+						<p class="subtitle is-6">Dalle ore 18, spritz e buffet illimitato</p>
+					</div>
+				</div>
+				<div class="media box">
+					<div class="media-left">
+						<p class="title is-5">Cena</p>
+						<p class="subtitle is-6">Dalle ore 20, menu alla carta</p>
+					</div>
+				</div>
+				<div class="media box">
+					<div class="media-left">
+						<p class="title is-5">Colazione</p>
+						<p class="subtitle is-6">include cornetto, caffe e acqua</p>
+					</div>
+				</div>
+				<div class="media box">
+					<div class="media-left">
+						<p class="title is-5">Aperitivo</p>
+						<p class="subtitle is-6">Dalle ore 18, spritz e buffet illimitato</p>
+					</div>
+				</div>
+			</section>
 		</section>
 	</div>
 	<footer th:replace="fragments/base.html :: footer"></footer>

@@ -93,3 +93,9 @@ a:hover{
 .tile .box:hover{
 	transform: scale(1.01);
 }
+
+
+.profile-image{
+	border:3px solid #bd4130;
+	border-radius:100%;
+}

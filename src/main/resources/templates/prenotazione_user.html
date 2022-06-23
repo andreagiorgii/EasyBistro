@@ -1,6 +1,6 @@
 <html>
 
-<head th:replace="fragments/base.html :: headerfiles(title='Prenota ora | Catering')"></head>
+<head th:replace="fragments/base.html :: headerfiles(title='Prenota ora | EasyBistro')"></head>
 
 <body>
 	<header th:replace="fragments/base.html :: navbar"></header>
@@ -19,7 +19,7 @@
 			</div>
 		</section>
 
-		<section class="section p-0">
+		<section class="section p-0 mb-6">
 			<div class="box">
 				<p class="title is-5">Dettagli prenotazione</p>
 				<p class="subtitle is-6">Compila i seguenti campi obbligatori</p>
@@ -28,13 +28,13 @@
 					<div class="field">
 						<label class="label">Cellulare</label>
 						<div class="control has-icons-left has-icons-right">
-							<input th:field="*{cellulare}" class="input" type="text" placeholder="+39 ">
+							<input th:field="*{cellulare}" class="input" type="number" placeholder="+39 ">
 							<span class="icon is-small is-left">
 								<i class="fas fa-user"></i>
 							</span>
 						</div>
-						<p class="has-text-left help" th:if="${#fields.hasErrors('prenotazioneForm.cellulare')}"
-							th:errors="${prenotazioneForm.cellulare}">Errore</p>
+						<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('cellulare')}"
+							th:errors="*{cellulare}">Errore</p>
 					</div>
 
 					<div class="field">
@@ -65,14 +65,29 @@
 						</div>
 					</div>
 
-					<div class="field">
-						<label class="label">Data</label>
-						<p class="control is-expanded">
-							<input class="input" th:field="*{{dataPrenotazione}}" type="datetime-local">
-						</p>
-						<!--						<p class="has-text-left help" th:if="${#fields.hasErrors('prenotazioneForm.dataPrenotazione')}"-->
-						<!--							th:errors="${prenotazioneForm.dataPrenotazione}">Errore</p>-->
+					<div class="field ">
+						<div class="field-body">
+							<div class="field">
+								<label class="label">Data</label>
+								<p class="control is-expanded">
+									<input class="input" th:field="*{dataPrenotazione}" type="date">
+								</p>
+								<p class="has-text-left has-text-danger help"
+									th:if="${#fields.hasErrors('dataPrenotazione')}" th:errors="*{dataPrenotazione}">
+									Errore
+								</p>
+							</div>
+							<div class="field">
+								<label class="label">Orario</label>
+								<p class="control is-expanded">
+									<input class="input" th:field="*{orario}" type="time">
+								</p>
+								<p class="has-text-left has-text-danger help" th:if="${#fields.hasErrors('orario')}"
+									th:errors="*{orario}">Errore</p>
+							</div>
+						</div>
 					</div>
+
 
 
 					<div class="field mt-5 is-grouped">

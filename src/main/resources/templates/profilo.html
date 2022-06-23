@@ -1,6 +1,6 @@
 <html>
 
-<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+<head th:replace="fragments/base.html :: headerfiles(title='Profilo | EasyBistro')"></head>
 
 <body>
 	<header th:replace="fragments/base.html :: navbar"></header>
@@ -20,14 +20,14 @@
 			<div class="box">
 				<p class="title is-5">Dettagli profilo</p>
 				<p class="subtitle is-6">Gestisci il tuo profilo da qui</p>
-				<div class="media">
+				<div class="media p-3">
 					<div class="media-left">
-						<figure class="image is-128x128">
+						<figure class="image is-128x128 profile-image">
 							<img class="is-rounded"
-								src="https://img.icons8.com/color/96/undefined/circled-user-male-skin-type-7--v1.png">
+								th:src="@{/images/avatar-svgrepo-com.svg}">
 						</figure>
 					</div>
-					<div class="media-content ml-2">
+					<div class="media-content ml-4">
 						<div class="field">
 							<p th:text="${loggedUser.nome + ' ' + loggedUser.cognome}" class="title is-5">Nome utente
 							</p>
@@ -43,6 +43,7 @@
 					</div>
 					<div class="media-right">
 						<a th:href="@{/user/update}" class="button is-rounded is-danger">Modifica profilo</a>
+						<a th:href="@{/user/allPrenotazioni}" class="button is-rounded is-danger">Le mie prenotazioni</a>
 					</div>
 				</div>
 			</div>
