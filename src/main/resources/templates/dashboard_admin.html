@@ -1,6 +1,6 @@
 <html>
 
-<head th:replace="fragments/base.html :: headerfiles(title='Registrati | Catering')"></head>
+<head th:replace="fragments/base.html :: headerfiles(title='Dashboard | EasyBistro')"></head>
 
 <body>
 	<header th:replace="fragments/base.html :: navbar"></header>
@@ -23,14 +23,14 @@
 					<div class="tile has-text-centered ">
 						<div class="tile is-parent is-vertical">
 							<article class="tile is-child box has-background-grigio">
-								<p class="title is-4 has-text-">Prenotazioni effettuate</p>
-								<p class="subtitle is-4">80</p>
+								<p class="title is-4 has-text-">Oggi</p>
+								<p class="subtitle is-4" th:text="${data}">data</p>
 							</article>
 						</div>
 						<div class="tile is-parent">
 							<article class="tile is-child box has-background-grigio">
-								<p class="title is-4">Posti disponibili</p>
-								<p class="subtitle is-4">100</p>
+								<p class="title is-4">Prenotazioni totali</p>
+								<p class="subtitle is-4" th:text="${prenotazioniTotali}">100</p>
 							</article>
 						</div>
 						<div class="tile is-parent">
@@ -46,21 +46,6 @@
 								<div class="level-left">
 									<div class="container">
 										<p class="title is-5">Vedi prenotazioni</p>
-										<p class="subtitle is-6">Vedi la lista delle prenotazioni</p>
-									</div>
-								</div>
-								<div class="level-right">
-									<i class="fa-solid fa-chevron-right"></i>
-								</div>
-							</div>
-						</article>
-					</a>
-					<a href="modifica_ristorante_admin.html" class="tile is-parent">
-						<article class="tile is-child box">
-							<div class="level is-mobile">
-								<div class="level-left">
-									<div class="container">
-										<p class="title is-5">Modifica profilo ristorante</p>
 										<p class="subtitle is-6">Vedi la lista delle prenotazioni</p>
 									</div>
 								</div>

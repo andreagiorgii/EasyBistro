@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -18,12 +20,16 @@ import it.uniroma3.siw.controller.validator.CredentialsValidator;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
+import it.uniroma3.siw.service.PrenotazioneService;
 
 @Controller
 public class UserController {
 
 	@Autowired
 	CredentialsService credentialsService;
+
+	@Autowired
+	PrenotazioneService prenotazioneService;
 
 	@Autowired
 	CredentialsValidator credentialsValidator;
@@ -41,6 +47,10 @@ public class UserController {
 		model.addAttribute("loggedUser", loggedUser);
 		// model.addAttribute("loggedCredentials", loggedCredentials);
 		if (loggedCredentials.getRuolo().equals(Credentials.ADMIN_ROLE)) {
+			String dataFormattata = new SimpleDateFormat("EEE, d MMM yyyy").format(new Date());
+			Long totalePrenotazioni = prenotazioneService.countAllPrenotazioni();
+			model.addAttribute("prenotazioniTotali",totalePrenotazioni);
+			model.addAttribute("data", dataFormattata);
 			return "dashboard_admin";
 		}
 		return "dashboard_user";

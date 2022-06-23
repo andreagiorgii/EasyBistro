@@ -1,6 +1,5 @@
 package it.uniroma3.siw.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -97,7 +96,6 @@ public class PrenotazioneController {
 		updatePrenotazione.setUsers(loggedUser);
 
 		this.prenotazioneValidator.validate(updatePrenotazione, prenotazioneBindingResult);
-
 		if (!prenotazioneBindingResult.hasErrors()) {
 			if (updatePrenotazione.getLuogo().equals(Prenotazione.INTERNO_POSTO)) {
 				updatePrenotazione.setLuogo(Prenotazione.INTERNO_POSTO);
@@ -117,7 +115,7 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni(loggedUser);
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		model.addAttribute("loggedUser",loggedUser);
+		model.addAttribute("loggedUser", loggedUser);
 		return "lista_prenotazioni_user";
 	}
 
@@ -136,7 +134,7 @@ public class PrenotazioneController {
 		User loggedUser = sessionData.getLoggedUser();
 		List<Prenotazione> allPrenotazioni = this.prenotazioneService.getAllPrenotazioni();
 		model.addAttribute("prenotazioneList", allPrenotazioni);
-		model.addAttribute("loggedUser",loggedUser);
+		model.addAttribute("loggedUser", loggedUser);
 		return "lista_prenotazioni_admin";
 	}
 

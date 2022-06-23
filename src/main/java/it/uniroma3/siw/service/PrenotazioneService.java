@@ -64,6 +64,13 @@ public class PrenotazioneService {
 		}
 		return prenotazione;
 	}
+	
+	
+	// Conta le prenotazioni totali registrate
+	public Long countAllPrenotazioni() {
+		Long totale = prenotazioneRepository.count();
+		return totale;
+	}
 
 
 	//restituisce tutte le prenotazioni tramite l'Id dell'Utente

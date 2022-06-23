@@ -15,6 +15,6 @@ public interface PrenotazioneRepository extends CrudRepository<Prenotazione, Lon
 	public List<Prenotazione> findByDataPrenotazione(LocalDate dataPrenotazione);
 
 	public List<Prenotazione> findByUsers(User users);
-
-
+	
+	long count();
 }
