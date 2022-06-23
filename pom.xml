@@ -15,7 +15,8 @@
 	<name>progetto-personale</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
+		<maven.version>3.6.2</maven.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -66,15 +67,8 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
-				<configuration>
-					<release>11</release>  <!--or <release>10</release> -->
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+
 
 </project>
